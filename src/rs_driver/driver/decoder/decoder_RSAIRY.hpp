@@ -364,6 +364,18 @@ inline void DecoderRSAIRY<T_PointCloud>::decodeDifopPkt(const uint8_t* packet, s
     this->install_mode_ = (uint16_t)(pkt.install_mode);
     this->loaded_install_info_ = true;
   }
+
+  // Print the imu calibration information
+  static bool output = true;
+  if(output)
+  {
+    output = false;
+    RS_INFOL << "imu_calib rotation[x,y,z,w]:[" << this->device_info_.qx << ","
+             << this->device_info_.qy << "," << this->device_info_.qz << ","
+             << this->device_info_.qw << "]" << " translation[x,y,z]:["
+             << this->device_info_.x << "," << this->device_info_.y << ","
+             << this->device_info_.z << "]" << RS_REND;
+  }
 }
 
 template <typename T_PointCloud>
